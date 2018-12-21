@@ -1,0 +1,146 @@
+2018-09-28 09:44:25,459  INFO Version:21 - HV000001: Hibernate Validator 6.0.10.Final
+2018-09-28 09:44:25,705  INFO Application:50 - Starting Application on DESKTOP-8DFBP3I with PID 14864 (C:\Users\wangxiwei\Desktop\nbcallbackSserver\target\classes started by wangxiwei in C:\Users\wangxiwei\Desktop\nbcallbackSserver)
+2018-09-28 09:44:25,706  INFO Application:659 - No active profile set, falling back to default profiles: default
+2018-09-28 09:44:25,777  INFO AnnotationConfigServletWebServerApplicationContext:590 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3943a2be: startup date [Fri Sep 28 09:44:25 CST 2018]; root of context hierarchy
+2018-09-28 09:44:27,604  INFO TomcatWebServer:91 - Tomcat initialized with port(s): 8080 (http)
+2018-09-28 09:44:27,854  INFO ContextLoader:285 - Root WebApplicationContext: initialization completed in 2080 ms
+2018-09-28 09:44:28,027  INFO ServletRegistrationBean:186 - Servlet dispatcherServlet mapped to [/]
+2018-09-28 09:44:28,032  INFO FilterRegistrationBean:245 - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-09-28 09:44:28,033  INFO FilterRegistrationBean:245 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-09-28 09:44:28,033  INFO FilterRegistrationBean:245 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-09-28 09:44:28,033  INFO FilterRegistrationBean:245 - Mapping filter: 'requestContextFilter' to: [/*]
+2018-09-28 09:44:28,462  INFO SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-09-28 09:44:28,700  INFO RequestMappingHandlerAdapter:574 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3943a2be: startup date [Fri Sep 28 09:44:25 CST 2018]; root of context hierarchy
+2018-09-28 09:44:28,777  INFO RequestMappingHandlerMapping:547 - Mapped "{[/NBIoT/smartLock]}" onto public net.sf.json.JSONObject com.routon.plsy.GreetingController.NBIoTFaceInfoUpload(javax.servlet.http.HttpServletRequest)
+2018-09-28 09:44:28,778  INFO RequestMappingHandlerMapping:547 - Mapped "{[/greeting]}" onto public com.routon.plsy.Greeting com.routon.plsy.GreetingController.greeting(java.lang.String)
+2018-09-28 09:44:28,779  INFO RequestMappingHandlerMapping:547 - Mapped "{[/NBIoT/callback]}" onto public java.lang.String com.routon.plsy.GreetingController.NBIoTCallback(javax.servlet.http.HttpServletRequest)
+2018-09-28 09:44:28,781  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/lock]}" onto public java.lang.String com.routon.plsy.NbCommandController.lock(java.lang.String,java.lang.String) throws java.lang.Exception
+2018-09-28 09:44:28,782  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/delWhiteNames]}" onto public java.lang.String com.routon.plsy.NbCommandController.delWhiteNames(java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception
+2018-09-28 09:44:28,782  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/clearRecord]}" onto public java.lang.String com.routon.plsy.NbCommandController.clearRecord(java.lang.String) throws java.lang.Exception
+2018-09-28 09:44:28,782  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/sendWhiteNames]}" onto public java.lang.String com.routon.plsy.NbCommandController.sendWhiteNames(java.lang.String,int,java.lang.String,java.lang.String) throws java.lang.Exception
+2018-09-28 09:44:28,783  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/synTime]}" onto public java.lang.String com.routon.plsy.NbCommandController.synTime(java.lang.String) throws java.lang.Exception
+2018-09-28 09:44:28,783  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/openAndClose]}" onto public java.lang.String com.routon.plsy.NbCommandController.openAndClose(int,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception
+2018-09-28 09:44:28,787  INFO RequestMappingHandlerMapping:547 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-09-28 09:44:28,788  INFO RequestMappingHandlerMapping:547 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-09-28 09:44:28,817  INFO SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-09-28 09:44:28,818  INFO SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-09-28 09:44:29,175  INFO ServerEndpointExporter:153 - Registering @ServerEndpoint class: class com.routon.plsy.websocket.NBServerEndpoint
+2018-09-28 09:44:29,190  INFO AnnotationMBeanExporter:433 - Registering beans for JMX exposure on startup
+2018-09-28 09:44:29,191  INFO AnnotationMBeanExporter:895 - Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-09-28 09:44:29,195  INFO AnnotationMBeanExporter:668 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2018-09-28 09:44:29,234  INFO TomcatWebServer:206 - Tomcat started on port(s): 8080 (http) with context path ''
+2018-09-28 09:44:29,237  INFO Application:59 - Started Application in 4.037 seconds (JVM running for 5.161)
+2018-09-28 09:44:29,238  INFO MessageSubsribeServlet:16 - 开始订阅消息......
+2018-09-28 09:44:55,868  INFO DispatcherServlet:494 - FrameworkServlet 'dispatcherServlet': initialization started
+2018-09-28 09:44:55,901  INFO DispatcherServlet:509 - FrameworkServlet 'dispatcherServlet': initialization completed in 33 ms
+2018-09-28 09:44:56,037  INFO HikariDataSource:110 - HikariPool-1 - Starting...
+2018-09-28 09:44:56,267  INFO HikariDataSource:123 - HikariPool-1 - Start completed.
+2018-09-28 09:44:56,316  INFO GreetingController:465 - 终端上报结束...
+2018-09-28 09:44:56,316  INFO GreetingController:292 - 开启添加/删除白名单线程...
+2018-09-28 09:44:56,316  INFO GreetingController:850 - {"sn":"2","result":0}
+2018-09-28 09:44:56,316  INFO GreetingController:296 - 开始删除白名单...
+2018-09-28 09:44:56,340  INFO GreetingController:303 - 开始发送第1条消息(删除)
+2018-09-28 09:45:00,797  INFO GreetingController:340 - 第1条白名单删除成功
+2018-09-28 09:45:00,797  INFO GreetingController:380 - 开始下发白名单...
+2018-09-28 09:45:00,814  INFO GreetingController:388 - 开始发送第1条消息
+2018-09-28 09:45:04,041  INFO GreetingController:424 - 第1条白名单下发成功
+2018-09-28 09:45:04,041  INFO GreetingController:380 - 开始下发白名单...
+2018-09-28 09:45:04,059  INFO GreetingController:388 - 开始发送第2条消息
+2018-09-28 09:45:07,247  INFO GreetingController:424 - 第2条白名单下发成功
+2018-09-28 09:45:20,543  INFO GreetingController:465 - 终端上报结束...
+2018-09-28 09:45:20,543  INFO GreetingController:292 - 开启添加/删除白名单线程...
+2018-09-28 09:45:20,543  INFO GreetingController:296 - 开始删除白名单...
+2018-09-28 09:45:20,543  INFO GreetingController:850 - {"sn":"2","result":0}
+2018-09-28 09:45:20,559  INFO GreetingController:303 - 开始发送第1条消息(删除)
+2018-09-28 09:45:23,746  INFO GreetingController:340 - 第1条白名单删除成功
+2018-09-28 09:45:23,746  INFO GreetingController:380 - 开始下发白名单...
+2018-09-28 09:45:23,760  INFO GreetingController:388 - 开始发送第1条消息
+2018-09-28 09:45:26,940  INFO GreetingController:424 - 第1条白名单下发成功
+2018-09-28 09:45:26,940  INFO GreetingController:380 - 开始下发白名单...
+2018-09-28 09:45:26,955  INFO GreetingController:388 - 开始发送第2条消息
+2018-09-28 09:45:30,170  INFO GreetingController:424 - 第2条白名单下发成功
+2018-09-28 09:46:53,207  INFO GreetingController:465 - 终端上报结束...
+2018-09-28 09:46:53,208  INFO GreetingController:292 - 开启添加/删除白名单线程...
+2018-09-28 09:46:53,208  INFO GreetingController:296 - 开始删除白名单...
+2018-09-28 09:46:53,208  INFO GreetingController:850 - {"sn":"2","result":0}
+2018-09-28 09:46:53,225  INFO GreetingController:303 - 开始发送第1条消息(删除)
+2018-09-28 09:46:58,442  INFO GreetingController:340 - 第1条白名单删除成功
+2018-09-28 09:46:58,443  INFO GreetingController:380 - 开始下发白名单...
+2018-09-28 09:46:58,461  INFO GreetingController:388 - 开始发送第1条消息
+2018-09-28 09:47:01,670  INFO GreetingController:424 - 第1条白名单下发成功
+2018-09-28 09:47:01,670  INFO GreetingController:380 - 开始下发白名单...
+2018-09-28 09:47:01,688  INFO GreetingController:388 - 开始发送第2条消息
+2018-09-28 09:47:04,876  INFO GreetingController:424 - 第2条白名单下发成功
+2018-09-28 09:49:40,101  INFO GreetingController:850 - {"report_whitelist_ack":[],"result":0}
+2018-09-28 09:49:48,580  INFO Version:21 - HV000001: Hibernate Validator 6.0.10.Final
+2018-09-28 09:49:48,748  INFO Application:50 - Starting Application on DESKTOP-8DFBP3I with PID 22312 (C:\Users\wangxiwei\Desktop\nbcallbackSserver\target\classes started by wangxiwei in C:\Users\wangxiwei\Desktop\nbcallbackSserver)
+2018-09-28 09:49:48,749  INFO Application:659 - No active profile set, falling back to default profiles: default
+2018-09-28 09:49:48,830  INFO AnnotationConfigServletWebServerApplicationContext:590 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@24a35978: startup date [Fri Sep 28 09:49:48 CST 2018]; root of context hierarchy
+2018-09-28 09:49:50,188  INFO TomcatWebServer:91 - Tomcat initialized with port(s): 8080 (http)
+2018-09-28 09:49:50,392  INFO ContextLoader:285 - Root WebApplicationContext: initialization completed in 1566 ms
+2018-09-28 09:49:50,573  INFO ServletRegistrationBean:186 - Servlet dispatcherServlet mapped to [/]
+2018-09-28 09:49:50,577  INFO FilterRegistrationBean:245 - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-09-28 09:49:50,578  INFO FilterRegistrationBean:245 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-09-28 09:49:50,578  INFO FilterRegistrationBean:245 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-09-28 09:49:50,578  INFO FilterRegistrationBean:245 - Mapping filter: 'requestContextFilter' to: [/*]
+2018-09-28 09:49:50,966  INFO SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-09-28 09:49:51,186  INFO RequestMappingHandlerAdapter:574 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@24a35978: startup date [Fri Sep 28 09:49:48 CST 2018]; root of context hierarchy
+2018-09-28 09:49:51,263  INFO RequestMappingHandlerMapping:547 - Mapped "{[/NBIoT/smartLock]}" onto public net.sf.json.JSONObject com.routon.plsy.GreetingController.NBIoTFaceInfoUpload(javax.servlet.http.HttpServletRequest)
+2018-09-28 09:49:51,265  INFO RequestMappingHandlerMapping:547 - Mapped "{[/NBIoT/callback]}" onto public java.lang.String com.routon.plsy.GreetingController.NBIoTCallback(javax.servlet.http.HttpServletRequest)
+2018-09-28 09:49:51,265  INFO RequestMappingHandlerMapping:547 - Mapped "{[/greeting]}" onto public com.routon.plsy.Greeting com.routon.plsy.GreetingController.greeting(java.lang.String)
+2018-09-28 09:49:51,267  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/lock]}" onto public java.lang.String com.routon.plsy.NbCommandController.lock(java.lang.String,java.lang.String) throws java.lang.Exception
+2018-09-28 09:49:51,267  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/delWhiteNames]}" onto public java.lang.String com.routon.plsy.NbCommandController.delWhiteNames(java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception
+2018-09-28 09:49:51,268  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/synTime]}" onto public java.lang.String com.routon.plsy.NbCommandController.synTime(java.lang.String) throws java.lang.Exception
+2018-09-28 09:49:51,268  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/openAndClose]}" onto public java.lang.String com.routon.plsy.NbCommandController.openAndClose(int,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception
+2018-09-28 09:49:51,269  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/sendWhiteNames]}" onto public java.lang.String com.routon.plsy.NbCommandController.sendWhiteNames(java.lang.String,int,java.lang.String,java.lang.String) throws java.lang.Exception
+2018-09-28 09:49:51,269  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/clearRecord]}" onto public java.lang.String com.routon.plsy.NbCommandController.clearRecord(java.lang.String) throws java.lang.Exception
+2018-09-28 09:49:51,273  INFO RequestMappingHandlerMapping:547 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-09-28 09:49:51,274  INFO RequestMappingHandlerMapping:547 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-09-28 09:49:51,361  INFO SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-09-28 09:49:51,362  INFO SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-09-28 09:49:51,633  INFO ServerEndpointExporter:153 - Registering @ServerEndpoint class: class com.routon.plsy.websocket.NBServerEndpoint
+2018-09-28 09:49:51,648  INFO AnnotationMBeanExporter:433 - Registering beans for JMX exposure on startup
+2018-09-28 09:49:51,649  INFO AnnotationMBeanExporter:895 - Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-09-28 09:49:51,654  INFO AnnotationMBeanExporter:668 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2018-09-28 09:49:51,689  INFO TomcatWebServer:206 - Tomcat started on port(s): 8080 (http) with context path ''
+2018-09-28 09:49:51,692  INFO Application:59 - Started Application in 3.263 seconds (JVM running for 3.743)
+2018-09-28 09:49:51,694  INFO MessageSubsribeServlet:16 - 开始订阅消息......
+2018-09-28 15:50:28,514  INFO Version:21 - HV000001: Hibernate Validator 6.0.10.Final
+2018-09-28 15:50:28,701  INFO Application:50 - Starting Application on DESKTOP-8DFBP3I with PID 14900 (C:\Users\wangxiwei\Desktop\nbcallbackSserver\target\classes started by wangxiwei in C:\Users\wangxiwei\Desktop\nbcallbackSserver)
+2018-09-28 15:50:28,702  INFO Application:659 - No active profile set, falling back to default profiles: default
+2018-09-28 15:50:28,766  INFO AnnotationConfigServletWebServerApplicationContext:590 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@52525845: startup date [Fri Sep 28 15:50:28 CST 2018]; root of context hierarchy
+2018-09-28 15:50:30,167  INFO TomcatWebServer:91 - Tomcat initialized with port(s): 8080 (http)
+2018-09-28 15:50:30,374  INFO ContextLoader:285 - Root WebApplicationContext: initialization completed in 1610 ms
+2018-09-28 15:50:30,553  INFO ServletRegistrationBean:186 - Servlet dispatcherServlet mapped to [/]
+2018-09-28 15:50:30,559  INFO FilterRegistrationBean:245 - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-09-28 15:50:30,560  INFO FilterRegistrationBean:245 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-09-28 15:50:30,560  INFO FilterRegistrationBean:245 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-09-28 15:50:30,561  INFO FilterRegistrationBean:245 - Mapping filter: 'requestContextFilter' to: [/*]
+2018-09-28 15:50:30,962  INFO SimpleUrlHandlerMapping:373 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-09-28 15:50:31,172  INFO RequestMappingHandlerAdapter:574 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@52525845: startup date [Fri Sep 28 15:50:28 CST 2018]; root of context hierarchy
+2018-09-28 15:50:31,247  INFO RequestMappingHandlerMapping:547 - Mapped "{[/greeting]}" onto public com.routon.plsy.Greeting com.routon.plsy.GreetingController.greeting(java.lang.String)
+2018-09-28 15:50:31,248  INFO RequestMappingHandlerMapping:547 - Mapped "{[/NBIoT/callback]}" onto public java.lang.String com.routon.plsy.GreetingController.NBIoTCallback(javax.servlet.http.HttpServletRequest)
+2018-09-28 15:50:31,249  INFO RequestMappingHandlerMapping:547 - Mapped "{[/NBIoT/smartLock]}" onto public net.sf.json.JSONObject com.routon.plsy.GreetingController.NBIoTFaceInfoUpload(javax.servlet.http.HttpServletRequest)
+2018-09-28 15:50:31,251  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/lock]}" onto public java.lang.String com.routon.plsy.NbCommandController.lock(java.lang.String,java.lang.String) throws java.lang.Exception
+2018-09-28 15:50:31,251  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/delWhiteNames]}" onto public java.lang.String com.routon.plsy.NbCommandController.delWhiteNames(java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception
+2018-09-28 15:50:31,252  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/openAndClose]}" onto public java.lang.String com.routon.plsy.NbCommandController.openAndClose(int,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception
+2018-09-28 15:50:31,252  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/clearRecord]}" onto public java.lang.String com.routon.plsy.NbCommandController.clearRecord(java.lang.String) throws java.lang.Exception
+2018-09-28 15:50:31,252  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/sendWhiteNames]}" onto public java.lang.String com.routon.plsy.NbCommandController.sendWhiteNames(java.lang.String,int,java.lang.String,java.lang.String) throws java.lang.Exception
+2018-09-28 15:50:31,253  INFO RequestMappingHandlerMapping:547 - Mapped "{[/nbiot/synTime]}" onto public java.lang.String com.routon.plsy.NbCommandController.synTime(java.lang.String) throws java.lang.Exception
+2018-09-28 15:50:31,257  INFO RequestMappingHandlerMapping:547 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-09-28 15:50:31,258  INFO RequestMappingHandlerMapping:547 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-09-28 15:50:31,343  INFO SimpleUrlHandlerMapping:373 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-09-28 15:50:31,344  INFO SimpleUrlHandlerMapping:373 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-09-28 15:50:31,610  INFO ServerEndpointExporter:153 - Registering @ServerEndpoint class: class com.routon.plsy.websocket.NBServerEndpoint
+2018-09-28 15:50:31,623  INFO AnnotationMBeanExporter:433 - Registering beans for JMX exposure on startup
+2018-09-28 15:50:31,624  INFO AnnotationMBeanExporter:895 - Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-09-28 15:50:31,628  INFO AnnotationMBeanExporter:668 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2018-09-28 15:50:31,660  INFO TomcatWebServer:206 - Tomcat started on port(s): 8080 (http) with context path ''
+2018-09-28 15:50:31,664  INFO Application:59 - Started Application in 3.297 seconds (JVM running for 3.778)
+2018-09-28 15:50:31,666  INFO MessageSubsribeServlet:16 - 开始订阅消息......
+2018-09-28 15:51:27,390  INFO DispatcherServlet:494 - FrameworkServlet 'dispatcherServlet': initialization started
+2018-09-28 15:51:27,416  INFO DispatcherServlet:509 - FrameworkServlet 'dispatcherServlet': initialization completed in 25 ms
+2018-09-28 15:51:27,444  INFO GreetingController:91 - 收到电信平台推送消息了....
+2018-09-28 15:51:27,445  INFO GreetingController:103 - {"notifyType":"deviceDataChanged","deviceId":"ea8bf75d-a813-4952-a2ee-9c931a8a1c0c","gatewayId":"ea8bf75d-a813-4952-a2ee-9c931a8a1c0c","requestId":null,"service":{"serviceId":"LockStatus","serviceType":"LockStatus","data":{"Battery":34,"Signal":23,"DoorState":2,"LockState":2},"eventTime":"20180928T014013Z"}}
+2018-09-28 15:51:27,445  INFO GreetingController:104 - 开始广播数据....
+2018-09-28 15:51:27,502 ERROR GreetingController:123 - 开始同步设备ea8bf75d-a813-4952-a2ee-9c931a8a1c0c的网络时间.

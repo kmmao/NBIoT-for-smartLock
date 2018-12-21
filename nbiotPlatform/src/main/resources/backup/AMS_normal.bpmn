@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <collaboration id="Collaboration">
+    <participant id="pool_AMS" name="授权管理平台流程图" processRef="AMS_process"></participant>
+  </collaboration>
+  <process id="NewAndRenewProcess" name="订单新建/续订流程" isExecutable="true">
+    <laneSet id="laneSet_AMS_process">
+      <lane id="system_operator" name="我方系统管理员"></lane>
+      <lane id="own_salesAssistant" name="我方销售助理">
+        <flowNodeRef>begin</flowNodeRef>
+        <flowNodeRef>newOrder</flowNodeRef>
+        <flowNodeRef>order_verify_ownSalesAssistant</flowNodeRef>
+        <flowNodeRef>exclusivegateway1</flowNodeRef>
+        <flowNodeRef>order_verify_ownFinance</flowNodeRef>
+        <flowNodeRef>exclusivegateway1</flowNodeRef>
+        <flowNodeRef>exclusivegateway3</flowNodeRef>
+        <flowNodeRef>end</flowNodeRef>
+        <flowNodeRef>renewOrder</flowNodeRef>
+        <flowNodeRef>exclusivegateway4</flowNodeRef>
+      </lane>
+      <lane id="customer_bussinessman" name="客户商务人员">
+        <flowNodeRef>order_commit</flowNodeRef>
+        <flowNodeRef>order_verify_customerBussinessman</flowNodeRef>
+        <flowNodeRef>exclusivegateway2</flowNodeRef>
+      </lane>
+      <lane id="customer_projectLeader" name="客户项目负责人"></lane>
+      <lane id="own_projectManager" name="我方项目管理人员"></lane>
+    </laneSet>
+    <startEvent id="begin" name="开始" activiti:initiator="applyUserId">
+      <extensionElements>
+        <activiti:formProperty id="applyUser" name="申请 人" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="companyName" name="公司名称" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="projectName" name="项目名称" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="projectId" name="项目ID" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="orderNum" name="订单号" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="authorNums" name="拟授权数量" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="remarks" name="备注信息" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="companyId" name="公司ID" type="string" required="true"></activiti:formProperty>
+      </extensionElements>
+    </startEvent>
+    <userTask id="newOrder" name="新建订单" activiti:candidateGroups="salesAssistant"></userTask>
+    <userTask id="order_commit" name="提交订单申请" activiti:candidateGroups="CustomerBussinessman"></userTask>
+    <userTask id="order_verify_ownSalesAssistant" name="销售助理订单审核" activiti:candidateGroups="salesAssistant">
+      <extensionElements>
+        <activiti:formProperty id="SalesAssistantverifyInfo" name="审核信息" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="ownSaleVeify" name="我方销售助理审批" type="enum" required="true">
+          <activiti:value id="true" name="同意"></activiti:value>
+          <activiti:value id="false" name="拒绝"></activiti:value>
+        </activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <userTask id="order_verify_customerBussinessman" name="客户订单审核" activiti:candidateGroups="CustomerBussinessman">
+      <extensionElements>
+        <activiti:formProperty id="customerVerifyInfo" name="审核信息" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="customerBussinessVeify" name="客户审批" type="enum" required="true">
+          <activiti:value id="true" name="同意"></activiti:value>
+          <activiti:value id="false" name="拒绝"></activiti:value>
+        </activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
+    <exclusiveGateway id="exclusivegateway2" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow_newOrder_commit" sourceRef="newOrder" targetRef="order_commit"></sequenceFlow>
+    <sequenceFlow id="order_commit_authbysaleAssistant" sourceRef="order_commit" targetRef="order_verify_ownSalesAssistant"></sequenceFlow>
+    <sequenceFlow id="flow_authbysaleAssistant_exclusivegateway1" sourceRef="order_verify_ownSalesAssistant" targetRef="exclusivegateway1"></sequenceFlow>
+    <sequenceFlow id="flow_exclusivegateway1_costomerAuth" name="我方销售助理审核通过" sourceRef="exclusivegateway1" targetRef="order_verify_customerBussinessman">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${ownSaleVeify=='true'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow_authbysaleAssistant_no_pass" name="我方销售助理审核拒绝" sourceRef="exclusivegateway1" targetRef="order_commit">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${ownSaleVeify=='false'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow_customerAuth_exclusivegateway2" sourceRef="order_verify_customerBussinessman" targetRef="exclusivegateway2"></sequenceFlow>
+    <sequenceFlow id="flow_customerAuth_no_pass" name="客户审核拒绝" sourceRef="exclusivegateway2" targetRef="order_commit">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${customerBussinessVeify=='false'}]]></conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway id="exclusivegateway3" name="Exclusive Gateway"></exclusiveGateway>
+    <userTask id="order_verify_ownFinance" name="财务审核" activiti:candidateGroups="FinanceAssistant">
+      <extensionElements>
+        <activiti:formProperty id="FinanceInfo" name="审核信息" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="FinanceVeify" name="财务审批" type="enum" required="true">
+          <activiti:value id="true" name="同意"></activiti:value>
+          <activiti:value id="false" name="拒绝"></activiti:value>
+        </activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow_exclusivegateway1_financeAuth" name="客户审核通过" sourceRef="exclusivegateway2" targetRef="order_verify_ownFinance">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${customerBussinessVeify=='true'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow_ownFinance_exclusivegateway3" sourceRef="order_verify_ownFinance" targetRef="exclusivegateway3"></sequenceFlow>
+    <sequenceFlow id="flow_exclusivegateway3_commit" name="财务审核拒绝" sourceRef="exclusivegateway3" targetRef="order_commit">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${FinanceVeify=='false'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow1" sourceRef="exclusivegateway3" targetRef="end"></sequenceFlow>
+    <endEvent id="end" name="结束"></endEvent>
+    <userTask id="renewOrder" name="续订订单" activiti:candidateGroups="salesAssistant"></userTask>
+    <sequenceFlow id="flow_renewOrder_commit" sourceRef="renewOrder" targetRef="order_commit"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway4" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow_begin" sourceRef="begin" targetRef="exclusivegateway4"></sequenceFlow>
+    <sequenceFlow id="flow_begin_newOrder" name="新建" sourceRef="exclusivegateway4" targetRef="newOrder">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${New=='true'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow_begin_renewOrder" name="续订" sourceRef="exclusivegateway4" targetRef="renewOrder">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${New=='false'}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Collaboration">
+    <bpmndi:BPMNPlane bpmnElement="Collaboration" id="BPMNPlane_Collaboration">
+      <bpmndi:BPMNShape bpmnElement="pool_AMS" id="BPMNShape_pool_AMS">
+        <omgdc:Bounds height="699.0" width="1301.0" x="10.0" y="10.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="system_operator" id="BPMNShape_system_operator">
+        <omgdc:Bounds height="140.0" width="1281.0" x="30.0" y="10.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="own_salesAssistant" id="BPMNShape_own_salesAssistant">
+        <omgdc:Bounds height="151.0" width="1281.0" x="30.0" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="customer_bussinessman" id="BPMNShape_customer_bussinessman">
+        <omgdc:Bounds height="136.0" width="1281.0" x="30.0" y="301.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="customer_projectLeader" id="BPMNShape_customer_projectLeader">
+        <omgdc:Bounds height="136.0" width="1281.0" x="30.0" y="437.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="own_projectManager" id="BPMNShape_own_projectManager">
+        <omgdc:Bounds height="136.0" width="1281.0" x="30.0" y="573.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="begin" id="BPMNShape_begin">
+        <omgdc:Bounds height="35.0" width="35.0" x="120.0" y="213.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="newOrder" id="BPMNShape_newOrder">
+        <omgdc:Bounds height="61.0" width="111.0" x="290.0" y="160.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="order_commit" id="BPMNShape_order_commit">
+        <omgdc:Bounds height="61.0" width="121.0" x="410.0" y="325.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="order_verify_ownSalesAssistant" id="BPMNShape_order_verify_ownSalesAssistant">
+        <omgdc:Bounds height="61.0" width="121.0" x="540.0" y="190.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="order_verify_customerBussinessman" id="BPMNShape_order_verify_customerBussinessman">
+        <omgdc:Bounds height="61.0" width="111.0" x="760.0" y="325.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="720.0" y="200.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway2" id="BPMNShape_exclusivegateway2">
+        <omgdc:Bounds height="40.0" width="40.0" x="940.0" y="335.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway3" id="BPMNShape_exclusivegateway3">
+        <omgdc:Bounds height="40.0" width="40.0" x="1110.0" y="200.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="order_verify_ownFinance" id="BPMNShape_order_verify_ownFinance">
+        <omgdc:Bounds height="61.0" width="121.0" x="900.0" y="190.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="end" id="BPMNShape_end">
+        <omgdc:Bounds height="35.0" width="35.0" x="1210.0" y="203.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="renewOrder" id="BPMNShape_renewOrder">
+        <omgdc:Bounds height="61.0" width="111.0" x="290.0" y="237.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway4" id="BPMNShape_exclusivegateway4">
+        <omgdc:Bounds height="40.0" width="40.0" x="190.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow_newOrder_commit" id="BPMNEdge_flow_newOrder_commit">
+        <omgdi:waypoint x="401.0" y="190.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="190.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="325.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="order_commit_authbysaleAssistant" id="BPMNEdge_order_commit_authbysaleAssistant">
+        <omgdi:waypoint x="531.0" y="355.0"></omgdi:waypoint>
+        <omgdi:waypoint x="600.0" y="355.0"></omgdi:waypoint>
+        <omgdi:waypoint x="600.0" y="251.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow_authbysaleAssistant_exclusivegateway1" id="BPMNEdge_flow_authbysaleAssistant_exclusivegateway1">
+        <omgdi:waypoint x="661.0" y="220.0"></omgdi:waypoint>
+        <omgdi:waypoint x="720.0" y="220.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow_exclusivegateway1_costomerAuth" id="BPMNEdge_flow_exclusivegateway1_costomerAuth">
+        <omgdi:waypoint x="760.0" y="220.0"></omgdi:waypoint>
+        <omgdi:waypoint x="815.0" y="220.0"></omgdi:waypoint>
+        <omgdi:waypoint x="815.0" y="325.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="776.0" y="240.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow_authbysaleAssistant_no_pass" id="BPMNEdge_flow_authbysaleAssistant_no_pass">
+        <omgdi:waypoint x="740.0" y="240.0"></omgdi:waypoint>
+        <omgdi:waypoint x="739.0" y="411.0"></omgdi:waypoint>
+        <omgdi:waypoint x="469.0" y="411.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="386.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="629.0" y="375.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow_customerAuth_exclusivegateway2" id="BPMNEdge_flow_customerAuth_exclusivegateway2">
+        <omgdi:waypoint x="871.0" y="355.0"></omgdi:waypoint>
+        <omgdi:waypoint x="940.0" y="355.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow_customerAuth_no_pass" id="BPMNEdge_flow_customerAuth_no_pass">
+        <omgdi:waypoint x="960.0" y="375.0"></omgdi:waypoint>
+        <omgdi:waypoint x="959.0" y="429.0"></omgdi:waypoint>
+        <omgdi:waypoint x="348.0" y="429.0"></omgdi:waypoint>
+        <omgdi:waypoint x="348.0" y="355.0"></omgdi:waypoint>
+        <omgdi:waypoint x="410.0" y="355.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="72.0" x="880.0" y="390.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow_exclusivegateway1_financeAuth" id="BPMNEdge_flow_exclusivegateway1_financeAuth">
+        <omgdi:waypoint x="960.0" y="335.0"></omgdi:waypoint>
+        <omgdi:waypoint x="960.0" y="251.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="72.0" x="967.0" y="230.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow_ownFinance_exclusivegateway3" id="BPMNEdge_flow_ownFinance_exclusivegateway3">
+        <omgdi:waypoint x="1021.0" y="220.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1110.0" y="220.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow_exclusivegateway3_commit" id="BPMNEdge_flow_exclusivegateway3_commit">
+        <omgdi:waypoint x="1130.0" y="200.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1129.0" y="121.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="121.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="325.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="72.0" x="879.0" y="61.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="1150.0" y="220.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1210.0" y="220.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow_renewOrder_commit" id="BPMNEdge_flow_renewOrder_commit">
+        <omgdi:waypoint x="401.0" y="267.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="267.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="325.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow_begin" id="BPMNEdge_flow_begin">
+        <omgdi:waypoint x="155.0" y="230.0"></omgdi:waypoint>
+        <omgdi:waypoint x="190.0" y="230.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow_begin_newOrder" id="BPMNEdge_flow_begin_newOrder">
+        <omgdi:waypoint x="210.0" y="210.0"></omgdi:waypoint>
+        <omgdi:waypoint x="210.0" y="190.0"></omgdi:waypoint>
+        <omgdi:waypoint x="290.0" y="190.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="205.0" y="130.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow_begin_renewOrder" id="BPMNEdge_flow_begin_renewOrder">
+        <omgdi:waypoint x="210.0" y="250.0"></omgdi:waypoint>
+        <omgdi:waypoint x="210.0" y="267.0"></omgdi:waypoint>
+        <omgdi:waypoint x="250.0" y="267.0"></omgdi:waypoint>
+        <omgdi:waypoint x="290.0" y="267.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="207.0" y="270.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
